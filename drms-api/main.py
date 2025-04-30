@@ -115,3 +115,31 @@ def get_employee_by_id(emp_id):
         raise HTTPException(status_code=404, detail="Employee not found")
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+# Delete Employee by ID
+@app.delete("/employees/delete/{emp_id}")
+def delete_employee_by_id(emp_id):
+    try:
+        response = employee_table.get_item(Key={'id':'Ariful_Islam'})
+        item = response.get('Item')
+
+        if not item or 'employee' not in item:
+            raise HTTPException(status_code = 400, details="Employee list not found")
+        
+        deleted = False
+        updated_item = []
+        for emp in item['employee']:
+            if emp['u_id'] != emp_id:
+                updated_item.append(emp)
+            else:
+                deleted = True
+        if deleted:
+            employee_table.put_item(Item={
+            'id': 'Ariful_Islam',
+            'employee': updated_item
+        })
+            return {"message": f"Employee with u_id {emp_id} deleted successfully"}
+        else:
+            raise HTTPException(status_code = 400, details=f"Employee with id {emp_id} not found")
+    except Exception as e:
+        raise HTTPException(status_code = 500, details=str(e))
