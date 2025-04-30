@@ -22,6 +22,20 @@ const ViewEmployees = () => {
     fetchEmployees()
   }, [])
 
+  const handleDelete = (e,empId) => {
+
+    e.preventDefault();
+    EmployeeServices.deleteEmployeeById(empId)
+    .then((res)=>{
+        if(employees){
+            setEmployees((prevElement)=>{
+                return prevElement.filter((emp)=> emp.u_id !== empId);
+            });
+        }
+    });
+};
+
+
   return (
     <div className="p-8 max-w-5xl mx-auto">
       <h2 className="text-3xl font-bold text-center mb-6 text-blue-700">Employee List</h2>
@@ -55,7 +69,7 @@ const ViewEmployees = () => {
                       Edit
                     </button>
                     <button
-                      onClick={() => console.log('Delete', emp.u_id)}
+                      onClick={(e, empId) => handleDelete(e, emp.u_id)}
                       className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
                     >
                       Delete
