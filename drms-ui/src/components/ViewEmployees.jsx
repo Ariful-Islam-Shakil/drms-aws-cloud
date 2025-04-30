@@ -49,7 +49,7 @@ const ViewEmployees = () => {
                   <td className="py-3 px-6">{new Date(emp.created_time).toLocaleString()}</td>
                   <td className="py-3 px-6 flex gap-2">
                     <button
-                      onClick={() => navigate('/edit', { state: { emp } })}
+                      onClick={() => navigate('/editEmployee', { state: { emp } })}
                       className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
                     >
                       Edit

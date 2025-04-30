@@ -30,7 +30,7 @@ class UpdateEmployeeInput(BaseModel):
 
 
 # Add new employee
-@app.post("/employee")
+@app.post("/employee/add")
 def add_employee(data: EmployeeInput):
     try:
         u_id = str(uuid.uuid4())
@@ -60,7 +60,7 @@ def add_employee(data: EmployeeInput):
 
 
 # Update employee
-@app.put("/employee/{u_id}")
+@app.put("/employee/update/{u_id}")
 def update_employee(u_id: str, update_data: UpdateEmployeeInput):
     try:
         response = employee_table.get_item(Key={'id': 'Ariful_Islam'})
@@ -86,7 +86,7 @@ def update_employee(u_id: str, update_data: UpdateEmployeeInput):
 
 
 # Get all employees
-@app.get("/employees")
+@app.get("/employees/getEmployees")
 def get_employees():
     try:
         response = employee_table.get_item(Key={'id': 'Ariful_Islam'})
@@ -95,5 +95,23 @@ def get_employees():
         if not item or 'employee' not in item:
             return {"employees": []}
         return {"employees": item['employee']}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# Get all employee by id
+@app.get("/employees/getEmployee/{emp_id}")
+def get_employee_by_id(emp_id):
+    try:
+        response = employee_table.get_item(Key={'id': 'Ariful_Islam'})
+        item = response.get('Item')
+
+        if not item or 'employee' not in item:
+            raise HTTPException(status_code=404, detail="Employee list not found")
+
+        for emp in item['employee']:
+            if emp['u_id'] == emp_id:
+                return emp
+        raise HTTPException(status_code=404, detail="Employee not found")
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
