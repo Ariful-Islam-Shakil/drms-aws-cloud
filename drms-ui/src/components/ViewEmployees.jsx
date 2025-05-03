@@ -60,7 +60,7 @@ const ViewEmployees = () => {
                 <tr key={emp.u_id} className="border-b hover:bg-gray-100">
                   <td className="py-3 px-6 text-left">{emp.u_id}</td>
                   <td className="py-3 px-6 text-left">{emp.name}</td>
-                  <td className="py-3 px-6">{new Date(emp.created_time).toLocaleString()}</td>
+                  <td className="py-3 px-6 text-left">{new Date(emp.created_time).toLocaleString()}</td>
                   <td className="py-3 px-6 flex gap-2">
                     <button
                       onClick={() => navigate('/editEmployee', { state: { emp } })}
