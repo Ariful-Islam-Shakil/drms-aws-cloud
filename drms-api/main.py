@@ -3,6 +3,7 @@ from pydantic import BaseModel
 import boto3
 import uuid
 from datetime import datetime
+from zoneinfo import ZoneInfo
 from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
 
@@ -29,12 +30,33 @@ class UpdateEmployeeInput(BaseModel):
     name: str
 
 
+#Creation of unique ID
+def create_unique_id():
+    employees = get_employees().get("employees", [])
+    if not employees:
+        return 'EMP001'
+
+    # Sort employees by u_id
+    employees.sort(key=lambda x: int(''.join(filter(str.isdigit, x['u_id']))))
+    emp_id = employees[-1]['u_id']
+
+    prefix = ''.join(filter(str.isalpha, emp_id))
+    number = ''.join(filter(str.isdigit, emp_id))
+    number = str(int(number) + 1).zfill(len(number))
+
+    return prefix + number
+
 # Add new employee
 @app.post("/employee/add")
 def add_employee(data: EmployeeInput):
     try:
-        u_id = str(uuid.uuid4())
-        created_time = datetime.utcnow().isoformat()
+        # Validate name
+        if not data.name.strip() or data.name.strip().isdigit():
+            raise HTTPException(status_code=400, detail="Invalid name: must contain non-digit characters.")
+        
+        # u_id = str(uuid.uuid4())
+        u_id = create_unique_id()
+        created_time = datetime.now(ZoneInfo("Asia/Dhaka")).isoformat()
 
         new_item = {
             'u_id': u_id,
@@ -63,6 +85,11 @@ def add_employee(data: EmployeeInput):
 @app.put("/employee/update/{u_id}")
 def update_employee(u_id: str, update_data: UpdateEmployeeInput):
     try:
+
+        # Validate name
+        if not update_data.name.strip() or update_data.name.strip().isdigit():
+            raise HTTPException(status_code=400, detail="Invalid name: must contain non-digit characters.")
+
         response = employee_table.get_item(Key={'id': 'Ariful_Islam'})
         item = response.get('Item')
 
