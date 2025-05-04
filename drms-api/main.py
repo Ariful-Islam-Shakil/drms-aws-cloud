@@ -1,8 +1,9 @@
 # main2.py
-from fastapi import FastAPI
+from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from models import EmployeeInput, UpdateEmployeeInput
-import employee_services
+import employee_services, images_services
+import yolo_api
 app = FastAPI()
 
 app.add_middleware(
@@ -32,3 +33,11 @@ def get_employee_by_id(emp_id: str):
 @app.delete("/employees/delete/{emp_id}")
 def delete_employee_by_id(emp_id: str):
     return employee_services.delete_employee_by_id(emp_id)
+
+
+#Images Services
+@app.post("/images/upload/")
+async def detect_tags(emp_id:str,  file: UploadFile = File(...)): 
+    return images_services.add_image_metadata(emp_id, file)
+
+    
