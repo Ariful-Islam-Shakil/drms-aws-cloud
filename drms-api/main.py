@@ -1,5 +1,5 @@
 # main2.py
-from fastapi import FastAPI, UploadFile, File
+from fastapi import FastAPI, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
 from models import EmployeeInput, UpdateEmployeeInput
 import employee_services, images_services
@@ -37,7 +37,7 @@ def delete_employee_by_id(emp_id: str):
 
 #Images Services
 @app.post("/images/upload/")
-async def detect_tags(emp_id:str,  file: UploadFile = File(...)): 
+async def detect_tags(emp_id:str = Form(...),  file: UploadFile = File(...)): 
     return images_services.add_image_metadata(emp_id, file)
 
     
