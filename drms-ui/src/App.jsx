@@ -5,17 +5,19 @@ import AdminPanel from './components/AdminPanel'
 import ViewEmployees from './components/ViewEmployees'
 import Queries from './components/Queries'
 import EditEmployee from './components/EditEmployee'
+import UploadImage from './components/UploadImage'
 
 function App() { 
 
   return (
     <Router>
       <Routes>
-        <Route path='/' element = {<AdminPanel/>} />
+        <Route path ='/' element = {<AdminPanel/>} />
         <Route path = "/add-employee" element = {<AddEmployee/>} />
-        <Route path='/view-employees' element = {<ViewEmployees/>} />
-        <Route path='/queries' element = {<Queries/>} />
-        <Route path="/editEmployee" element={<EditEmployee />} />
+        <Route path ='/view-employees' element = {<ViewEmployees/>} />
+        <Route path ='/queries' element = {<Queries/>} />
+        <Route path ="/editEmployee" element ={<EditEmployee />} />
+        <Route path ='/uploadImage' element = {<UploadImage />} />
       </Routes>
     </Router>
   )
