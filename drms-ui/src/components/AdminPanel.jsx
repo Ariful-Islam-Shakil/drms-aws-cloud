@@ -25,6 +25,13 @@ const AdminPanel = () => {
           </button>
 
           <button
+            onClick={() => navigate('/uploadImage')}
+            className="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-3 rounded-lg transition duration-300"
+          >
+            📤 Upload Images
+          </button>
+
+          <button
             onClick={() => navigate('/queries')}
             className="w-full bg-purple-500 hover:bg-purple-600 text-white font-semibold py-3 rounded-lg transition duration-300"
           >
