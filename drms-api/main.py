@@ -1,9 +1,9 @@
 # main2.py
-from fastapi import FastAPI, UploadFile, File, Form
+from fastapi import FastAPI, UploadFile, File, Form, Query
 from fastapi.middleware.cors import CORSMiddleware
 from models import EmployeeInput, UpdateEmployeeInput
 import employee_services, images_services
-import yolo_api
+from typing import List, Optional
 app = FastAPI()
 
 app.add_middleware(
@@ -41,3 +41,9 @@ async def detect_tags(emp_id:str = Form(...),  file: UploadFile = File(...)):
     return images_services.add_image_metadata(emp_id, file)
 
     
+#Query images
+@app.get("/images/query")
+def get_images(
+    tags: list[str] = Query(..., description='List of tags to filter images'), 
+    emp_id: Optional[str] = None):
+    return images_services.get_images_info(tags, emp_id)
