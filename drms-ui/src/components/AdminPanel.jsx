@@ -32,7 +32,7 @@ const AdminPanel = () => {
           </button>
 
           <button
-            onClick={() => navigate('/queries')}
+            onClick={() => navigate('/queryImages')}
             className="w-full bg-purple-500 hover:bg-purple-600 text-white font-semibold py-3 rounded-lg transition duration-300"
           >
             ❓ Queries
