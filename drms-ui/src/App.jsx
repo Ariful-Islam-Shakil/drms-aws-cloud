@@ -3,9 +3,9 @@ import './App.css'
 import AddEmployee from './components/AddEmployee'
 import AdminPanel from './components/AdminPanel'
 import ViewEmployees from './components/ViewEmployees'
-import Queries from './components/Queries'
 import EditEmployee from './components/EditEmployee'
 import UploadImage from './components/UploadImage'
+import QueriyImages from './components/QueriyImages'
 
 function App() { 
 
@@ -15,7 +15,7 @@ function App() {
         <Route path ='/' element = {<AdminPanel/>} />
         <Route path = "/add-employee" element = {<AddEmployee/>} />
         <Route path ='/view-employees' element = {<ViewEmployees/>} />
-        <Route path ='/queries' element = {<Queries/>} />
+        <Route path ='/queryImages' element = {<QueriyImages/>} />
         <Route path ="/editEmployee" element ={<EditEmployee />} />
         <Route path ='/uploadImage' element = {<UploadImage />} />
       </Routes>
