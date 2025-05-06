@@ -4,7 +4,7 @@ from datetime import datetime
 from zoneinfo import ZoneInfo
 import boto3, yolo_api
 from datetime import timezone, timedelta
-
+from typing import List, Optional
 
 # Initialize DynamoDB
 dynamodb = boto3.resource('dynamodb')
@@ -90,5 +90,29 @@ def add_image_metadata(emp_id: str, file: UploadFile):
         raise HTTPException(status_code=500, detail=str(e))
 
 
- 
+ # Query images information
+def get_images_info(tags: list[str], emp_id: Optional[str] = None):
+    try:
+        response = image_table.get_item(Key={'id':'Arifs_images'})
+        item = response.get('Item')
+        if not item or 'images_data' not in item:
+            raise HTTPException(status_code=404, detail='No images found')
+        output_images = []
+        tags = set(x.lower() for x in tags)
+        for img in item['images_data']:
+            db_tags = set(x.lower() for x in img.get('tags', []))
+            if db_tags & tags:
+                if emp_id:
+                    if emp_id == img.get('emp_id'):
+                        output_images.append(img)
+                else:
+                    output_images.append(img)
+        if output_images:
+            return {'images': output_images}
+        else:
+            raise HTTPException(status_code=404, detail='Tags or Employee not matched')
+
+    except Exception as e:
+        raise HTTPException(status_code = 500, detail=str(e))
+       
  
