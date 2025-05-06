@@ -12,6 +12,13 @@ class ImageServices {
             }
         })
     }
+
+    queryImages(tags, emp_id){
+        const params = new URLSearchParams();
+        tags.forEach(tag => {params.append('tags', tag)});
+        if (emp_id){params.append('emp_id', emp_id)};
+        return axios.get(API_BASE_URL + '/query', {params})
+    }
 }
 
 export default new ImageServices()
