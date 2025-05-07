@@ -29,13 +29,13 @@ def upload_to_s3(file: UploadFile, bucket_name: str, s3_folder_path: str):
         )
 
         print(f"✅ File uploaded successfully to {bucket_name}/{s3_path}")
-        return s3_path, generate_presigned_url(bucket_name, s3_path)
+        return s3_path #, generate_presigned_url(bucket_name, s3_path)
     except Exception as e:
         print(f"❌ Upload failed: {e}")
         return None
 
 # Generate image url for downloading image
-def generate_presigned_url(bucket_name: str, s3_path: str, expiration: int = 3600):
+def generate_presigned_url(bucket_name: str, s3_path: str, expiration: int = 300):
     try:
         url = s3.generate_presigned_url (
             'get_object',
@@ -73,7 +73,7 @@ def add_image_metadata(emp_id: str, file: UploadFile):
         images = item.get('images_data', []) if item and 'images_data' in item else []
         img_id = create_unique_img_id(images)
         tags, dimension, size = yolo_api.get_image_tags_yolov8_file(file)
-        s3_path, url = upload_to_s3(file, 'alpha-ai-new', 'Ariful_Islam')
+        s3_path = upload_to_s3(file, 'alpha-ai-new', 'Ariful_Islam')
 
         new_image = {
             'img_id': img_id,
@@ -83,7 +83,7 @@ def add_image_metadata(emp_id: str, file: UploadFile):
             'created_time': created_time,
             'tags': tags,
             's3path': s3_path,
-            'download_link': url
+            # 'download_link': url
         }
 
         if item and 'images_data' in item:
