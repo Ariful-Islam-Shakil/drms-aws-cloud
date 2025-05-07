@@ -107,7 +107,7 @@ const QueriyImages = () => {
                 <p className="text-gray-700"><strong>Image Id: </strong> {img.img_id}</p>
                 <p className="text-gray-600"><strong>Employee ID:</strong> {img.emp_id}</p>
                 <p className="text-gray-600"><strong>Tags:</strong> {img.tags?.join(', ')}</p>
-                <p className="text-gray-600"><strong>Size:</strong> {img.size} - {img.dimension}</p>
+                <p className="text-gray-600"><strong>Size:</strong> {img.size} KB - {img.dimension}</p>
               </div>
             ))}
           </div>

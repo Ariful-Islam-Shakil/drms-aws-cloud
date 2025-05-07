@@ -16,13 +16,24 @@ def upload_to_s3(file: UploadFile, bucket_name: str, s3_folder_path: str):
     try:
         fileName = file.filename
         s3_path = f"{s3_folder_path}/{fileName}"
-        s3.upload_fileobj(file.file, bucket_name, s3_path)
+        
+        # Get content type from UploadFile (FastAPI's UploadFile has it)
+        content_type = file.content_type or 'application/octet-stream'
+        file.file.seek(0)
+
+        s3.upload_fileobj(
+            file.file,
+            bucket_name,
+            s3_path,
+            ExtraArgs={'ContentType': content_type}
+        )
+
         print(f"✅ File uploaded successfully to {bucket_name}/{s3_path}")
         return s3_path, generate_presigned_url(bucket_name, s3_path)
     except Exception as e:
         print(f"❌ Upload failed: {e}")
         return None
-    
+
 # Generate image url for downloading image
 def generate_presigned_url(bucket_name: str, s3_path: str, expiration: int = 3600):
     try:
@@ -104,8 +115,10 @@ def get_images_info(tags: list[str], emp_id: Optional[str] = None):
             if db_tags & tags:
                 if emp_id:
                     if emp_id == img.get('emp_id'):
+                        img['download_link'] = generate_presigned_url('alpha-ai-new', img.get('s3path'))
                         output_images.append(img)
                 else:
+                    img['download_link'] = generate_presigned_url('alpha-ai-new', img.get('s3path'))
                     output_images.append(img)
         if output_images:
             return {'images': output_images}
