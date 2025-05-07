@@ -46,20 +46,26 @@ const UploadImage = () => {
   };
 
   return (
-    <div className="p-6 max-w-3xl mx-auto bg-white rounded-xl shadow-md space-y-6">
-      <h2 className="text-2xl font-bold text-center text-gray-800">Upload Employee Image</h2>
+    <div className="bg-gray-700 text-white min-h-screen py-12 px-6 md:px-20">
+
+    <div className="p-6 max-w-3xl mx-auto bg-gray-700 rounded-xl shadow-md space-y-6">
+      <h2 className="text-2xl font-bold text-center text-shadow-white">Upload Employee Image</h2>
 
       <div className="space-y-4">
-        <label className="block text-gray-700 font-medium">Select Employee:</label>
+        <label className="block text-white font-medium">Select Employee:</label>
         <select
           onChange={(e) =>
             setSelectedEmp(employees.find((emp) => emp.u_id === e.target.value))
           }
           className="w-full p-2 border border-gray-300 rounded-md"
-        >
-          <option value="">-- Choose Employee --</option>
+          >
+          <option value=""
+            className='bg-gray-400 text-white'
+          >-- Choose Employee --</option>
           {employees.map((emp) => (
-            <option key={emp.u_id} value={emp.u_id}>
+            <option
+              className='bg-gray-400 text-white'
+            key={emp.u_id} value={emp.u_id}>
               {emp.u_id} - {emp.name}
             </option>
           ))}
@@ -73,12 +79,12 @@ const UploadImage = () => {
           accept="image/*"
           onChange={handleImageChange}
           className="w-full p-2 border border-gray-300 rounded-md"
-        />
+          />
 
         {previewUrl && (
           <img
-            src={previewUrl}
-            alt="Preview"
+          src={previewUrl}
+          alt="Preview"
             className="max-w-xs mx-auto rounded shadow"
           />
         )}
@@ -89,7 +95,7 @@ const UploadImage = () => {
           onClick={handleUpload}
           disabled={loading || !image || !selectedEmp}
           className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 disabled:bg-gray-400"
-        >
+          >
           {loading ? 'Uploading...' : 'Upload'}
         </button>
       </div>
@@ -98,6 +104,7 @@ const UploadImage = () => {
         <p className="text-center font-medium text-green-600">{responseMsg}</p>
       )}
     </div>
+    </div> 
   );
 };
 

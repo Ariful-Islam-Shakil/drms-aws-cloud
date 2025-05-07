@@ -37,8 +37,10 @@ const ViewEmployees = () => {
 
 
   return (
+    <div className="bg-gray-700 text-white min-h-screen py-12 px-6 md:px-20">
+
     <div className="p-8 max-w-5xl mx-auto">
-      <h2 className="text-3xl font-bold text-center mb-6 text-blue-700">Employee List</h2>
+      <h2 className="text-3xl font-bold text-center mb-6 text-shadow-white">Employee List</h2>
 
       {loading ? (
         <p className="text-center">Loading...</p>
@@ -46,7 +48,7 @@ const ViewEmployees = () => {
         <p className="text-center text-gray-500">No employees found.</p>
       ) : (
         <div className="overflow-x-auto">
-          <table className="min-w-full bg-white border border-gray-200 shadow rounded-lg">
+          <table className="min-w-full bg-gray-700 border border-gray-200 shadow rounded-lg">
             <thead className="bg-blue-500 text-white">
               <tr>
                 <th className="py-3 px-6 text-left">Employee ID</th>
@@ -57,7 +59,7 @@ const ViewEmployees = () => {
             </thead>
             <tbody>
               {employees.map((emp, index) => (
-                <tr key={emp.u_id} className="border-b hover:bg-gray-100">
+                <tr key={emp.u_id} className="border-b hover:bg-gray-500">
                   <td className="py-3 px-6 text-left">{emp.u_id}</td>
                   <td className="py-3 px-6 text-left">{emp.name}</td>
                   <td className="py-3 px-6 text-left">{new Date(emp.created_time).toLocaleString()}</td>
@@ -82,6 +84,7 @@ const ViewEmployees = () => {
         </div>
       )}
     </div>
+  </div>
   )
 }
 
