@@ -60,7 +60,8 @@ def add_employee(data: EmployeeInput):
         new_item = {
             'u_id': u_id,
             'name': data.name,
-            'created_time': created_time
+            'created_time': created_time,
+            'active' : True
         }
 
         response = employee_table.get_item(Key={'id': 'Ariful_Islam'})
@@ -115,10 +116,11 @@ def get_employees():
     try:
         response = employee_table.get_item(Key={'id': 'Ariful_Islam'})
         item = response.get('Item')
-
+        active_emp = []
         if not item or 'employee' not in item:
             return {"employees": []}
-        return {"employees": item['employee']}
+        active_emp = [emp for emp in item['employee'] if emp.get('active')]
+        return {"employees":  active_emp}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
@@ -154,6 +156,8 @@ def delete_employee_by_id(emp_id):
             if emp['u_id'] != emp_id:
                 updated_item.append(emp)
             else:
+                emp['active'] = False
+                updated_item.append(emp)
                 deleted = True
         if deleted:
             employee_table.put_item(Item={
