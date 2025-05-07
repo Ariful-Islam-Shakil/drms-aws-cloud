@@ -29,7 +29,8 @@ const AddEmployee = () => {
   }
 
   return (
-    <div className="max-w-md mx-auto mt-8 p-4 border rounded shadow bg-white">
+    <div className="bg-gray-700 text-white min-h-screen py-12 px-6 md:px-20">
+    <div className="max-w-md mx-auto mt-8 p-4 border rounded shadow bg-gray-700">
       <h2 className="text-2xl font-bold mb-4">Add Employee</h2>
 
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -64,6 +65,7 @@ const AddEmployee = () => {
       </form>
 
       {message && <p className="mt-4 text-center">{message}</p>}
+    </div>
     </div>
   )
 }
