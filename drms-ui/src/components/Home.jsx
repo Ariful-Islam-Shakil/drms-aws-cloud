@@ -39,7 +39,7 @@ const Home = () => {
 // Reusable feature card component
 function FeatureCard({ title, description }) {
   return (
-    <div className="bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-lg transition">
+    <div className="bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-lg hover:transition hover:bg-gray-900">
       <h2 className="text-2xl font-semibold mb-2">{title}</h2>
       <p className="text-gray-400">{description}</p>
     </div>
