@@ -43,7 +43,7 @@ const QueriyImages = () => {
 
       <div className="space-y-4">
         <div>
-          <label className="block font-medium text-gray-700 mb-1">Enter Tags (comma separated)</label>
+          <label className="block font-medium text-white mb-1">Enter Tags (comma separated)</label>
           <input
             type="text"
             name="tags"
@@ -97,7 +97,7 @@ const QueriyImages = () => {
       </div>
 
       <div className="mt-8">
-        <h3 className="text-xl font-semibold text-gray-800 mb-3">Query Results</h3>
+        <h3 className="text-xl font-semibold text-white mb-3">Query Results</h3>
         {results.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {results.map((img, index) => (
@@ -107,10 +107,10 @@ const QueriyImages = () => {
                   alt={img.name || 'Image'}
                   className="w-full h-40 object-cover rounded-md mb-2"
                 />
-                <p className="text-gray-700"><strong>Image Id: </strong> {img.img_id}</p>
-                <p className="text-gray-600"><strong>Employee ID:</strong> {img.emp_id}</p>
-                <p className="text-gray-600"><strong>Tags:</strong> {img.tags?.join(', ')}</p>
-                <p className="text-gray-600"><strong>Size:</strong> {img.size} KB - {img.dimension}</p>
+                <p className="text-gray-300"><strong>Image Id: </strong> {img.img_id}</p>
+                <p className="text-gray-300"><strong>Employee ID:</strong> {img.emp_id}</p>
+                <p className="text-gray-300"><strong>Tags:</strong> {img.tags?.join(', ')}</p>
+                <p className="text-gray-300"><strong>Size:</strong> {img.size} KB - {img.dimension}</p>
               </div>
             ))}
           </div>
