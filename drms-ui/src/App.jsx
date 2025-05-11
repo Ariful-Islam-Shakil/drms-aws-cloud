@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import './App.css'
-import AddEmployee from './components/AddEmployee'
-import AdminPanel from './components/AdminPanel'
+import AddEmployee from './components/AddEmployee' 
 import ViewEmployees from './components/ViewEmployees'
 import EditEmployee from './components/EditEmployee'
 import UploadImage from './components/UploadImage'
