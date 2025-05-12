@@ -82,8 +82,7 @@ def add_image_metadata(emp_id: str, file: UploadFile):
             'dimension': dimension,
             'created_time': created_time,
             'tags': tags,
-            's3path': s3_path,
-            # 'download_link': url
+            's3path': s3_path
         }
 
         if item and 'images_data' in item:
