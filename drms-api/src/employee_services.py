@@ -97,7 +97,7 @@ def update_employee(u_id: str, update_data: UpdateEmployeeInput):
 
         updated = False
         for emp in item['employee']:
-            if emp['u_id'] == u_id:
+            if emp['u_id'] == u_id and emp['active']:
                 emp.update({"name": update_data.name})
                 updated = True
                 break
