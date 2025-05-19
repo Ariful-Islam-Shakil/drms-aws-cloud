@@ -95,23 +95,23 @@ def add_image_metadata(emp_id: str, file: UploadFile):
 
         image_table.put_item(Item = item)
 
-        return {"message": "Image metadata added successfully", "img_id": img_id}
+        return {"message": "Image metadata added successfully", "tags": tags}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
 
  # Query images information
-def get_images_info(tags: list[str], emp_id: Optional[str] = None):
+def get_images_info(tags: list[str] = None, emp_id: Optional[str] = None):
     try:
         response = image_table.get_item(Key={'id':'Arifs_images'})
         item = response.get('Item')
         if not item or 'images_data' not in item:
             raise HTTPException(status_code=404, detail='No images found')
         output_images = []
-        tags = set(x.lower() for x in tags)
+        tags = set(x.lower() for x in tags) 
         for img in item['images_data']:
             db_tags = set(x.lower() for x in img.get('tags', []))
-            if db_tags & tags:
+            if (db_tags & tags) or ('none' in tags):
                 if emp_id:
                     if emp_id == img.get('emp_id'):
                         img['download_link'] = generate_presigned_url('alpha-ai-new', img.get('s3path'))

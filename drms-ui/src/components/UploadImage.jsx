@@ -37,7 +37,8 @@ const UploadImage = () => {
     setResponseMsg('');
     try {
       const res = await ImageServices.uploadImage(selectedEmp.u_id, image);
-      setResponseMsg(res.message || '✅ Uploaded successfully!');
+      
+      setResponseMsg(`${res.data.message} --> tags: [${res.data.tags}]` || '✅ Uploaded successfully!');
     } catch (error) {
       setResponseMsg('❌ Upload failed.');
       console.error(error);
@@ -101,7 +102,7 @@ const UploadImage = () => {
       </div>
 
       {responseMsg && (
-        <p className="text-center font-medium text-green-600">{responseMsg}</p>
+        <p className="text-center font-medium text-white">{responseMsg}</p>
       )}
     </div>
     </div> 

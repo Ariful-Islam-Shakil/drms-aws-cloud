@@ -3,7 +3,7 @@ import EmployeeServices from '../services/EmployeeServices';
 import ImageServices from '../services/ImageServices';
 
 const QueriyImages = () => {
-  const [tags, setTags] = useState([]);
+  const [tags, setTags] = useState(['none']);
   const [employees, setEmployees] = useState([]);
   const [selectEmployee, setSelectEmployee] = useState(null);
   const [searching, setSearching] = useState(false);
@@ -27,6 +27,7 @@ const QueriyImages = () => {
     setError('');
     setResults([]);
     try {
+      console.log(tags)
       const response = await ImageServices.queryImages(tags, selectEmployee?.u_id);
       setResults(response.data.images || []);
     } catch (error) {
@@ -83,7 +84,7 @@ const QueriyImages = () => {
           <button
             onClick={handleSearch}
             className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 disabled:bg-gray-400"
-            disabled={searching || tags.length === 0}
+            disabled={searching}
           >
             {searching ? 'Searching...' : 'Search'}
           </button>
