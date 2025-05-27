@@ -1,8 +1,8 @@
 # main2.py
 from fastapi import FastAPI, UploadFile, File, Form, Query
 from fastapi.middleware.cors import CORSMiddleware
-from models import EmployeeInput, UpdateEmployeeInput
-import employee_services, images_services
+from src.models import EmployeeInput, UpdateEmployeeInput
+from src import employee_services, images_services
 from typing import List, Optional
 app = FastAPI()
 
