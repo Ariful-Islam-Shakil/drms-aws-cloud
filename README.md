@@ -93,33 +93,47 @@ This is a **full-stack web application** built using **FastAPI** for the backend
 
 # 🚀 How to Run the Project
 
-## ✅ Backend (FastAPI)
+## ✅ Environment setup
 
 1. Clone the repo and navigate to backend:
    ```bash
    git clone https://github.com/Ariful-Islam-Shakil/drms-aws-cloud.git
-   cd .\drms-api\src\
 
-2. Install dependencies:
+2. setup virtual environment environemt using `python3.12`
+    ```bash
+      python3.12 -m venv .venv
+    ```
+3. Activate virtual environment:
+    ```bash
+    .\.venv\Scripts\activate
+    ```
+4. Install dependencies:
     ```bash
     pip install -r requirements.txt
     ```
 
 3. Set up AWS credentials (via .env or environment variables).
+## **Take parallaly two terminals**
 
-4. Run the FastAPI server:
+### **Terminal-1: Run Backend Server**
 
-    
+- Move current directory to `drms-api`:
+    ```bash 
+    cd .\drms-api\ 
+    ```
+- Run the FastAPI server:
     ```bash
     uvicorn main:app --reload
     ```
     ➡️ The backend will run at: http://127.0.0.1:8000
 
+    ➡️ API Testing with swagger: http://127.0.0.1:8000/docs
+
 ## 💻 Frontend (React.js)
 1. Navigate to frontend directory:
 
     ```bash 
-    cd .\drms-api\
+    cd .\drms-ui\ 
     ```
 2. Install dependencies:
     ```bash

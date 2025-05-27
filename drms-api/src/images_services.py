@@ -2,7 +2,8 @@
 from fastapi import HTTPException, FastAPI, UploadFile, File 
 from datetime import datetime
 from zoneinfo import ZoneInfo
-import boto3, yolo_api
+import boto3
+from src import yolo_api
 from datetime import timezone, timedelta
 from typing import List, Optional
 
