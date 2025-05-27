@@ -113,7 +113,16 @@ This is a **full-stack web application** built using **FastAPI** for the backend
     ```
 
 3. Set up AWS credentials (via .env or environment variables).
-## **Take parallaly two terminals**
+    ```bash
+    aws configure
+    ```
+    ```text
+    AWS Access Key ID [None]: YOUR_ACCESS_KEY_ID
+    AWS Secret Access Key [None]: YOUR_SECRET_ACCESS_KEY
+    Default region name [None]: YOUR_REGION (e.g., us-east-1)
+    Default output format [None]: json
+    ```
+## **Take two terminals**
 
 ### **Terminal-1: Run Backend Server**
 
@@ -129,7 +138,7 @@ This is a **full-stack web application** built using **FastAPI** for the backend
 
     ➡️ API Testing with swagger: http://127.0.0.1:8000/docs
 
-## 💻 Frontend (React.js)
+### 💻 Tarminal-2: Frontend (React.js)
 1. Navigate to frontend directory:
 
     ```bash 
